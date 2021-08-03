@@ -41,7 +41,7 @@ person has a way to cantact any client back.
 ```json
 {
   "response": "string",
-  "errors": array[]
+  "errors": "array[]"
 }
 ```
 
@@ -60,7 +60,7 @@ merged to the "text" field.
 {
   "subject": "string",
   "text": "string",
-  "to": "string" || ["string"]
+  "to": "string" "or" ["string"]
 }
 ```
 
@@ -69,7 +69,7 @@ merged to the "text" field.
 ```json
 {
   "response": "string",
-  "errors": array[]
+  "errors": "array[]"
 }
 ```
 
@@ -81,4 +81,4 @@ To host the server, go to Heroku, create an account and login. Create a new app,
 
 Lastly, to run the server on Heroku, a special file must be added to the root directory, with the execution command when hosted. For Heroku the file name should be `Procfile`, and if the server is build on Express the execution command should be `web: npm start`. Use `web: node app.js` or `web: node index.js` if using other or custom methods or scripts to run the server. This command can be viewed and changed from inside Heroku.
 
-An instance of this app, for private purposes, has been hosted on: https://octoemailsender.herokuapp.com/.
+An instance of this app, for private purposes, has been hosted on: https://octoemailsender.herokuapp.com.
