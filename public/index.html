@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <title>EmailSender</title>
+  </head>
+  <body>
+    <div class="mt-5 mb-5">
+      <article class="markdown-body entry-content container-lg" itemprop="text">
+        <h1>EmailSender</h1>
+        <p class="mb-5">
+          Repository at:
+          <a href="https://github.com/SamirHabota/EmailSender" target="_blank"
+            >https://github.com/SamirHabota/EmailSender</a
+          >
+        </p>
+        <h2>Introduction</h2>
+        <p>
+          This is a simple NodeJs API server application, for sending emails to
+          yourself, or to other clients. It has been integrated with SendGrid
+          (<a href="https://sendgrid.com" rel="nofollow" target="_blank"
+            >https://sendgrid.com</a
+          >), and requires a basic sender email authentication setup, and API
+          key creation. The server will send emails from the set up sender email
+          from SendGrid. The server itself is protected with an API key of its
+          own, and all the creditentials and configuration infomration need to
+          be filled out inside the <code>.env</code> file. The applications API
+          key needs to be provided inside the headers via basic Api-Key
+          authorization.
+        </p>
+        <h2>Endpotins</h2>
+        <h3>
+          <code>/contactMe</code>
+        </h3>
+        <p>
+          This POST endpoint, sends an email to a privately set up email
+          address. It's function and body is ment to contact a single person,
+          being from a website, blog, comment section etc. The default receiver,
+          once set up, needs to be changed inside the configuratinos and
+          <code>.env</code> file, for any kind of receiver manipulation. Since
+          the endpoints context is to contact someone via an integrated message,
+          additional fields like an email address and phone number are provided,
+          and formatted inside the server call. This way the specified contacted
+          person has a way to cantact any client back.
+        </p>
+        <h4>request</h4>
+        <div class="highlight highlight-source-json">
+          <pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>, 
+  <span class="pl-s"><span class="pl-pds">"</span>phone<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>
+}</pre>
+        </div>
+        <h4>response</h4>
+        <div class="highlight highlight-source-json">
+          <pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>response<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>errors<span class="pl-pds">"</span></span>:<span class="pl-s">array[]</span>
+}</pre>
+        </div>
+        <h3>
+          <code>/sendEmailTo</code>
+        </h3>
+        <p>
+          This is a more flexible POST endpoint, that can send emails to a
+          specific receiver provided inside the endpoints body. The routes "to"
+          attribute accepts either a single email address, or an array of
+          emails, for multiple sending actions. Since the endpoint context is
+          general email sending to receivers, the main message attribute is
+          merged to the "text" field.
+        </p>
+        <h4>request</h4>
+        <div class="highlight highlight-source-json">
+          <pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>to<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span> || ["string"]</span>
+}</pre>
+        </div>
+        <h4>response</h4>
+        <div class="highlight highlight-source-json">
+          <pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>response<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>errors<span class="pl-pds">"</span></span>:<span class="pl-s">array[]</span> 
+}</pre>
+        </div>
+
+        <h2>Heroku hosting</h2>
+        <p>
+          One of the options for deploying and hosting a NodeJs API server is
+          Heroku (<a
+            href="https://www.heroku.com"
+            rel="nofollow"
+            target="_blank"
+            >https://www.heroku.com</a
+          >). Prerequisites are having the heroku cli installed on your machine
+          by running the command <code>npm install -g heroku</code>.
+        </p>
+        <p>
+          To host the server, go to Heroku, create an account and login. Create
+          a new app, and either create a repository directly on Heroku, and push
+          your code there, or to make use of "private" CI/CD: first publish the
+          code on GitHhub, and then connect that GitHub repository to the Heroku
+          app (or other Git services like GitLab or Gitbucket). By choosing the
+          <code>master</code> branch, every commit or pull request to master,
+          will automtically update your server. From there a SSL and domain name
+          setup are further down the settings.
+        </p>
+        <p>
+          Lastly, to run the server on Heroku, a special file must be added to
+          the root directory, with the execution command when hosted. For Heroku
+          the file name should be <code>Procfile</code>, and if the server is
+          build on Express the execution command should be
+          <code>web: npm start</code>. Use <code>web: node app.js</code> or
+          <code>web: node index.js</code> if using other or custom methods or
+          scripts to run the server. This command can be viewed and changed from
+          inside Heroku.
+        </p>
+        <p>
+          An instance of this app, for private purposes, has been hosted on:
+          <a
+            href="https://octoemailsender.herokuapp.com"
+            rel="nofollow"
+            target="_blank"
+            >https://octoemailsender.herokuapp.com</a
+          >.
+        </p>
+      </article>
+    </div>
+  </body>
+</html>
