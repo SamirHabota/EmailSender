@@ -4,12 +4,12 @@
 
 This is a simple NodeJs API server application, for sending emails to
 yourself, or to other clients. It has been integrated with SendGrid
-(https://node-js-auth-api.herokuapp.com), and requires a basic sender email authentication setup, and API
+(https://sendgrid.com/), and requires a basic sender email authentication setup, and API
 key creation. The server will send emails from the set up sender email
 from SendGrid. The server itself is protected with an API key of its
 own, and all the creditentials and configuration infomration need to
 be filled out inside the `.env` file. The applications API
-key needs to be provided inside the headers via basic Api-Key
+key needs to be provided inside the headers via a basic Api-Key field.
 
 ## Endpotins
 
